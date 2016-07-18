@@ -7,8 +7,13 @@ int		ft_atoi(char *str)
 	rs = 0;
 	i = 0;
 	n_mark = 0;
-	if (str[i] == '-')
+	if (str[0] == '-')
+	{
 		n_mark = 1;
+		i++;
+	}
+	if (str[0] == '+')
+		i++;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		rs *= 10;
