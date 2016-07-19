@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asun <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/18 18:03:04 by asun              #+#    #+#             */
-/*   Updated: 2016/07/18 18:03:05 by asun             ###   ########.fr       */
+/*   Created: 2016/07/18 11:30:38 by asun              #+#    #+#             */
+/*   Updated: 2016/07/18 11:30:39 by asun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	min_strlen(char *s1, char *s2)
+char	*ft_strncpy(char *dest, char *src, unsigned int n)
 {
 	int i;
 
 	i = 0;
-	while (s1[i] != '\0' && s2[i] != '\0')
-		i++;
-	return (i + 1);
-}
-
-int	ft_strcmp(char *s1, char *s2)
-{
-	int l;
-	int i;
-
-	l = min_strlen(s1, s2);
-	i = 0;
-	while (i < l)
+	while (i < n)
 	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
+		dest[i] = src[i];
+		if (src[i] == '\0')
+			break ;
 		i++;
 	}
-	return (0);
+	i++;
+	while (i < n)
+	{
+		dest[i] = '\0';
+		i++;
+	}
+	return (dest);
 }
