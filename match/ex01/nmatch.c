@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   match.c                                            :+:      :+:    :+:   */
+/*   nmatch.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asun <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/24 21:21:10 by asun              #+#    #+#             */
-/*   Updated: 2016/07/24 21:21:11 by asun             ###   ########.fr       */
+/*   Created: 2016/07/24 21:21:28 by asun              #+#    #+#             */
+/*   Updated: 2016/07/24 21:21:29 by asun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	match(char *s1, char *s2)
+int	nmatch(char *s1, char *s2)
 {
 	if (!(*s1) && !(*s2))
 		return (1);
 	if (*s2 == '*')
 	{
 		if (!(*s1))
-			return (match(s1, s2 + 1));
+			return (nmatch(s1, s2 + 1));
 		if (*s1)
-			return (match(s1, s2 + 1) || match(s1 + 1, s2));
+			return (nmatch(s1, s2 + 1) + nmatch(s1 + 1, s2));
 	}
 	if (!(*s1) || !(*s2))
 		return (0);
 	if (*s1 != *s2)
 		return (0);
 	if (*s1 == *s2)
-		return (match(s1 + 1, s2 + 1));
+		return (nmatch(s1 + 1, s2 + 1));
 	return (-1);
 }
