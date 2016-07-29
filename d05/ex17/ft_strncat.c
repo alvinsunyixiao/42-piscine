@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asun <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/07/18 20:35:20 by asun              #+#    #+#             */
+/*   Updated: 2016/07/18 20:35:21 by asun             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 int		ft_strlen(char *str)
 {
 	int i;
@@ -8,14 +20,16 @@ int		ft_strlen(char *str)
 	return (i);
 }
 
-char	*ft_strncat(char *dest, char *src, unsigned int n)
+char	*ft_strncat(char *dest, char *src, int nb)
 {
 	int l;
 	int i;
 
 	l = ft_strlen(dest);
 	i = 0;
-	while (src[i] != '\0' && i < n)
+	if (nb < 0)
+		nb = ft_strlen(src);
+	while (src[i] != '\0' && i < nb)
 	{
 		dest[i + l] = src[i];
 		i++;

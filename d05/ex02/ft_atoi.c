@@ -10,7 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(char *str)
+char	*trim_space(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
+		str++;
+	return (str);
+}
+
+int		ft_atoi(char *str)
 {
 	int		n_mark;
 	int		i;
@@ -19,6 +29,7 @@ int	ft_atoi(char *str)
 	rs = 0;
 	i = 0;
 	n_mark = 0;
+	str = trim_space(str);
 	if (str[i] == '-')
 	{
 		n_mark = 1;

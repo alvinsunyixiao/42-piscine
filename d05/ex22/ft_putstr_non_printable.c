@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
+/*   ft_putstr_non_printable.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asun <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/19 11:34:44 by asun              #+#    #+#             */
-/*   Updated: 2016/07/19 11:34:45 by asun             ###   ########.fr       */
+/*   Created: 2016/07/19 13:41:50 by asun              #+#    #+#             */
+/*   Updated: 2016/07/19 13:41:51 by asun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,57 +22,60 @@ int		ft_strlen(char *str)
 	return (i);
 }
 
-int		check_valid_base(char *base)
-{
-	int l;
-	int i;
-	int j;
-
-	i = 0;
-	l = ft_strlen(base);
-	if (l <= 1)
-		return (0);
-	while (i < l - 1)
-	{
-		j = i + 1;
-		if (base[i] == '+' || base[i] == '-' || base[i] <= 31)
-			return (0);
-		while (j < l)
-		{
-			if (base[i] == base[j])
-				return (0);
-			j++;
-		}
-		i++;
-	}
-	return (1);
-}
-
-void	recursive_print(int nbr, char *base, int iter_c)
+void	ft_putnbr_base(int nbr, int count)
 {
 	int		numeric_base;
 	long	n;
+	char	*base;
 
-	if (!check_valid_base(base))
-		return ;
+	base = "0123456789abcdef";
 	numeric_base = ft_strlen(base);
 	n = nbr;
-	if (n == 0)
+	if (n == 0 && count == 1)
 	{
-		if (iter_c == 0)
-			ft_putchar(base[0]);
+		ft_putchar('0');
 		return ;
 	}
+	else if (n == 0)
+		return ;
 	if (n < 0)
 	{
 		ft_putchar('-');
 		n = -n;
 	}
-	recursive_print(n / numeric_base, base, iter_c + 1);
+	ft_putnbr_base(n / numeric_base, count + 1);
 	ft_putchar(base[n % numeric_base]);
 }
 
-void	ft_putnbr_base(int nbr, char *base)
+int		is_printable(char c)
 {
-	recursive_print(nbr, base, 0);
+	if (c < 32 || c == 127)
+		return (0);
+	else
+		return (1);
+}
+
+void	print_one(char c)
+{
+	if (is_printable(c))
+		ft_putchar(c);
+	else
+	{
+		ft_putchar('\\');
+		ft_putnbr_base(c, 0);
+	}
+}
+
+void	ft_putstr_non_printable(char *str)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (str[i] != '\0')
+	{
+		print_one(str[i]);
+		i++;
+	}
 }

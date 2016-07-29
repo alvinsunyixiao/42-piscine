@@ -1,6 +1,18 @@
-int	min_strlen(char *s1, char *s2, unsigned int n)
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asun <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/07/18 19:30:22 by asun              #+#    #+#             */
+/*   Updated: 2016/07/18 19:30:23 by asun             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+unsigned int	min_strlen(char *s1, char *s2, unsigned int n)
 {
-	int i;
+	unsigned int i;
 
 	i = 0;
 	while (s1[i] != '\0' && s2[i] != '\0')
@@ -11,10 +23,10 @@ int	min_strlen(char *s1, char *s2, unsigned int n)
 		return (n);
 }
 
-int	ft_strcmp(char *s1, char *s2, unsigned int n)
+int				ft_strncmp(char *s1, char *s2, unsigned int n)
 {
-	int l;
-	int i;
+	unsigned int l;
+	unsigned int i;
 
 	l = min_strlen(s1, s2, n);
 	i = 0;

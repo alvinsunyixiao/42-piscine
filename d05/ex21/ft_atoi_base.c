@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi_base.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asun <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/07/19 12:59:00 by asun              #+#    #+#             */
+/*   Updated: 2016/07/19 12:59:01 by asun             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 int		search(char c, char *base)
 {
 	int i;
@@ -48,7 +60,7 @@ int		check_valid_base(char *base)
 	return (1);
 }
 
-int		check_valid_str(char *str, char *base)
+char	*check_valid_str(char *str, char *base)
 {
 	int i;
 	int j;
@@ -56,6 +68,8 @@ int		check_valid_str(char *str, char *base)
 
 	i = 0;
 	l = ft_strlen(base);
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
+		str++;
 	if (str[0] == '-' || str[0] == '+')
 		str++;
 	while (str[i] != '\0')
@@ -67,7 +81,7 @@ int		check_valid_str(char *str, char *base)
 			return (0);
 		i++;
 	}
-	return (1);
+	return (str);
 }
 
 int		ft_atoi_base(char *str, char *base)
@@ -85,10 +99,14 @@ int		ft_atoi_base(char *str, char *base)
 		ng_mark = 1;
 	if (!(check_valid_base(base) && check_valid_str(str, base)))
 		return (0);
+	str = check_valid_str(str, base);
 	while (i < ft_strlen(str))
 	{
 		rs *= num_base;
 		rs += search(str[i], base);
+		i++;
 	}
+	if (ng_mark)
+		rs = -rs;
 	return (rs);
 }

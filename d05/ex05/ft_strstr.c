@@ -32,15 +32,15 @@ char	*ft_strstr(char *str, char *to_find)
 	search_len = ft_strlen(to_find);
 	if (search_len == 0)
 		return (str);
-	while (i < str_len - search_len)
+	while (i < str_len - search_len + 1)
 	{
-		j = i;
-		while (j < i + search_len)
+		j = 0;
+		while (j < search_len)
 		{
-			if (j == i + search_len - 1)
-				return (str + i);
-			if (str[i] != to_find[j - i])
+			if (str[i + j] != to_find[j])
 				break ;
+			if (j == search_len - 1)
+				return (str + i);
 			j++;
 		}
 		i++;
