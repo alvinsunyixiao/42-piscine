@@ -63,16 +63,19 @@ int		count_row(t_list **list, int p)
 	return (num);
 }
 
-void	ft_tostring(t_list **list, char *fs, int len)
+int		ft_tostring(t_list **list, char *fs, int len)
 {
-	int flag;
+	int		flag;
+	t_list	*tmp;
 
 	flag = 0;
 	fs[len] = '\0';
 	while (*list && flag < 1)
 	{
 		fs[len - 1] = (*list)->c;
-		*list = (*list)->next;
+		tmp = (*list)->next;
+		free(*list);
+		*list = tmp;
 		len--;
 		if ((*list)->c == '\n')
 			flag++;
@@ -80,13 +83,13 @@ void	ft_tostring(t_list **list, char *fs, int len)
 	flag = 3;
 	while (flag > 0)
 	{
+		if (!(*list))
+			return (0);
 		if ((*list)->c != '\n')
-		{
-			g_sym[flag - 1] = (*list)->c;
-			flag--;
-		}
+			g_sym[--flag] = (*list)->c;
 		*list = (*list)->next;
 	}
+	return (1);
 }
 
 int		count_col(t_list **list, int fd)
@@ -131,7 +134,8 @@ char	**arman_read(int *row, int *col, int fd)
 	if (*col == 1)
 		return (0);
 	fs = (char*)malloc(sizeof(char) * (*col + 1));
-	ft_tostring(&list, fs, *col);
+	if (!ft_tostring(&list, fs, *col))
+		return (0);
 	*row = count_row(&list, 1);
 	if (*row < 1)
 		return (0);

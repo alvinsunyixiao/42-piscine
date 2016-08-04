@@ -53,8 +53,6 @@ int		main(int argc, char **argv)
 	}
 	while (++i < argc)
 	{
-		if (i != 1)
-			write(1, "\n", 1);
 		fd = open(argv[i], O_RDONLY);
 		if (fd == -1)
 		{
